@@ -1,6 +1,28 @@
 version: '3.1'
 services:
-  db:
+  d3hiring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - d3hiring-db
+    environment:
+      NODE_ENV: production
+      JWT_SECRET: 398569123847293847_CHANGE_ME
+      MYSQL_HOST: d3hiring-db
+      MYSQL_PORT: 3306
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: d3hiring
+    ports:
+      - '8400:8400'
+    volumes:
+      - node_modules:/usr/app/node_modules
+    networks:
+      - d3hiring-network
+    command: node --max-old-space-size=512 dist/start.js
+  d3hiring-db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -9,3 +31,13 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: d3hiring
+    volumes:
+      - d3hiring-data:/var/lib/mysql
+    networks:
+      - d3hiring-network
+networks:
+  d3hiring-network:
+    driver: bridge
+volumes:
+  d3hiring-data:
+  node_modules:

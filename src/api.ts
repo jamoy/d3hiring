@@ -12,7 +12,7 @@ export async function bootstrap() {
     pluginTimeout: 5000,
     trustProxy: true,
     maxParamLength: 100,
-    disableRequestLogging: true,
+    disableRequestLogging: false,
     ignoreTrailingSlash: true,
     genReqId: () => {
       return uuid.v1().split('-').reverse().join('-');
@@ -63,7 +63,7 @@ export async function bootstrap() {
     api.register(openapi, {
       specification: path.resolve(__dirname, `../spec.oas3.yml`),
       securityHandlers: {
-        TokenAuthorizer: require('./authorizer/token.ts').default,
+        TokenAuthorizer: require('./authorizer/token').default,
       },
       prefix: 'api',
       noAdditional: true,

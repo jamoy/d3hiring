@@ -9,7 +9,7 @@ export async function initialize() {
     username: process.env.MYSQL_USERNAME || 'mysql',
     password: process.env.MYSQL_PASSWORD || 'password',
     database: process.env.MYSQL_DATABASE || 'd3hiring',
-    synchronize: process.env.NODE_ENV !== 'production',
+    synchronize: true,
     cache: process.env.NODE_ENV === 'production',
     entities: [__dirname + '/entity/*{.js,.ts}'],
   });

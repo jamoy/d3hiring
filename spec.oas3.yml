@@ -8,8 +8,6 @@ paths:
   /authorize:
     post:
       operationId: Authorize
-      security:
-        - TokenAuthorizer: []
       responses:
         200:
           description: Successful operation
@@ -35,7 +33,7 @@ paths:
       security:
         - TokenAuthorizer: []
       responses:
-        200:
+        204:
           description: Successful operation
   /retrievefornotifications:
     post:
