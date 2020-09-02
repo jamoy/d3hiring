@@ -1,0 +1,54 @@
+{
+  "name": "d3hiring",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn --project tsconfig.json src/service.ts",
+    "build": "tsc --noEmit false",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/pino": "^6.3.0",
+    "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
+    "fastify": "^3.3.0",
+    "fastify-cors": "^4.1.0",
+    "fastify-openapi-glue": "^2.2.0",
+    "fastify-rate-limit": "^4.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
+    "nanoid": "^3.1.12",
+    "pino": "^6.5.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25",
+    "uuid": "^8.3.0",
+    "validator": "^13.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.12",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^14.6.2",
+    "@types/uuid": "^8.3.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "pino-pretty": "^4.2.0",
+    "prettier": "^2.1.1",
+    "pretty-quick": "^3.0.0",
+    "ts-jest": "^26.3.0",
+    "ts-node-dev": "^1.0.0-pre.61",
+    "typescript": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  }
+}

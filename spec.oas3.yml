@@ -1,0 +1,53 @@
+openapi: 3.0.2
+info:
+  title: D3Hiring API
+  version: 1.0.0
+servers:
+  - url: /rest/1
+paths:
+  /authorize:
+    post:
+      operationId: Authorize
+      security:
+        - TokenAuthorizer: []
+      responses:
+        200:
+          description: Successful operation
+  /register:
+    post:
+      operationId: Register
+      security:
+        - TokenAuthorizer: []
+      responses:
+        204:
+          description: Successful operation
+  /commonstudents:
+    get:
+      operationId: CommonStudents
+      security:
+        - TokenAuthorizer: []
+      responses:
+        200:
+          description: Successful operation
+  /suspend:
+    post:
+      operationId: Suspend
+      security:
+        - TokenAuthorizer: []
+      responses:
+        200:
+          description: Successful operation
+  /retrievefornotifications:
+    post:
+      operationId: RetrieveForNotifications
+      security:
+        - TokenAuthorizer: []
+      responses:
+        200:
+          description: Successful operation
+components:
+  securitySchemes:
+    TokenAuthorizer:
+      type: apiKey
+      in: header
+      name: authorization
