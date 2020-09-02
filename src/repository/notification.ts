@@ -3,50 +3,45 @@ import { Notification } from '../entity/notification';
 import TeacherRepository from '../repository/teacher';
 import StudentRepository from '../repository/student';
 import { Student } from '../entity/student';
-import ApiError from '../error';
 import isEmail from 'validator/lib/isEmail';
 import { Teacher } from '../entity/teacher';
 
 @EntityRepository(Notification)
 export class NotificationRepository extends Repository<Notification> {
-  private parseMessageForStudents(message: string) {
-    return [];
-  }
-
   async Broadcast(teacher: string, message: string) {
     let mentions = message.match(/[@]+[A-Za-z0-9_.@]+/g);
-    mentions = mentions ? mentions.map(e => e.substr(1)).filter(e => isEmail(e)) : [];
+    mentions = mentions ? mentions.map(mention => mention.substr(1)).filter(mention => isEmail(mention)) : [];
 
-    const t = await TeacherRepository.findOne({ email: teacher });
+    const existingTeacher = await TeacherRepository.findOne({ email: teacher });
     const recipients = await TeacherRepository.RegisteredTo([teacher]);
-    let n = this.create();
-    n.message = message;
-    if (t) {
-      n.teacher = t;
+    let notification = this.create();
+    notification.message = message;
+    if (existingTeacher) {
+      notification.teacher = existingTeacher;
     }
-    n.students = [];
+    notification.students = [];
     if (recipients) {
       recipients
-        .map((o: Teacher) => o.students)
+        .map((teacher: Teacher) => teacher.students)
         .flat()
-        .map((s: Student) => n.students.push(s));
+        .map((student: Student) => notification.students.push(student));
     }
     const existingMentions = await StudentRepository.Exists(mentions);
     if (existingMentions) {
       existingMentions
-        .filter((s: Student) => s.suspended === false)
-        .filter((s: Student) => !n.students.map((s: Student) => s.id).includes(s.id))
-        .map((s: Student) => n.students.push(s));
+        .filter((student: Student) => student.suspended === false)
+        .filter((student: Student) => !notification.students.map((student: Student) => student.id).includes(student.id))
+        .map((student: Student) => notification.students.push(student));
     }
-    await this.save(n);
+    await this.save(notification);
     return {
       recipients: [
         ...(recipients
           ? recipients
-              .map((o: Teacher) => o.students)
+              .map((teacher: Teacher) => teacher.students)
               .flat()
-              .filter((s: Student) => s.suspended === false)
-              .map((s: Student) => s.email)
+              .filter((student: Student) => student.suspended === false)
+              .map((student: Student) => student.email)
           : []),
         ...mentions,
       ],

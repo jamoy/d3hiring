@@ -3,7 +3,7 @@ info:
   title: D3Hiring API
   version: 1.0.0
 servers:
-  - url: /rest/1
+  - url: /api
 paths:
   /authorize:
     post:
@@ -11,9 +11,28 @@ paths:
       responses:
         200:
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
   /register:
     post:
       operationId: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - teacher
+                - students
+              properties:
+                teacher:
+                  $ref: '#/components/schemas/Teacher'
+                students:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Student'
       security:
         - TokenAuthorizer: []
       responses:
@@ -22,14 +41,41 @@ paths:
   /commonstudents:
     get:
       operationId: CommonStudents
+      parameters:
+        - name: teacher
+          required: true
+          in: query
+          schema:
+            oneOf:
+              - type: string
+              - type: array
       security:
         - TokenAuthorizer: []
       responses:
         200:
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  students:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Student'
   /suspend:
     post:
       operationId: Suspend
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - student
+              properties:
+                student:
+                  $ref: '#/components/schemas/Student'
       security:
         - TokenAuthorizer: []
       responses:
@@ -43,7 +89,29 @@ paths:
       responses:
         200:
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recipients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Student'
 components:
+  schemas:
+    Teacher:
+      type: string
+      format: email
+    Student:
+      type: string
+      format: email
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFjaGVyIjoidGVhY2hlcmtlbkBnbWFpbC5jb20iLCJpYXQiOjE1OTkwMzc3MTMsImV4cCI6MTU5OTEyNDExMywiaXNzIjoiZDNoaXJpbmcifQ.iC5-8DCgYCCwiuUllLtfSbljLTIUOftg3IWtdoOLJ9E
   securitySchemes:
     TokenAuthorizer:
       type: apiKey

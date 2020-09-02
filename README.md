@@ -22,7 +22,7 @@ docker build -t d3hiring .
 docker run -e NODE_ENV=production -e MYSQL_HOST=mysql -p 8400:8400 d3hiring
 ```
 
-- make sure you modify `MYSQL_HOST` to point to the correct HOST, else starting wont work
+- make sure you modify `MYSQL_HOST` to point to the correct `HOST`, else the service won't know where the database is.
 
 ### Testing
 
@@ -36,8 +36,8 @@ yarn test
 
 1. @mention parsing uses regex and does not guarantee email validity
 2. The codebase uses `synchronize: true` in TypeORM for convenience. Of course, this should not be done in production.
-3. When a student OR teacher does not exist in the request, it is created. If it exists, it uses the existing record.
+3. When a student OR teacher does not exist in a request, it is created. If it exists, it uses the existing record.
 4. Sample auth via JWT is implemented in `./src/authorizer/token.ts`
 5. OAS3 is implemented up front and have rudimentary validations baked in
 6. Starting docker-compose will have the server throw errors because MySQL is not yet available. I did not include a wait time for this.
-7. Request loggin is enabled for verbosity
+7. Request logging is enabled for verbosity

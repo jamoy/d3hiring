@@ -9,15 +9,25 @@ export class StudentRepository extends Repository<Student> {
     if (!student || !isEmail(student)) {
       throw new ApiError('Student provided is not a valid email', 400, 'ERR400');
     }
-    let t = await this.findOne({ email: student });
-    if (t) {
-      t.suspended = true;
-      await this.save(t);
+    let existingStudent = await this.findOne({ email: student });
+    if (existingStudent) {
+      existingStudent.suspended = true;
+      await this.save(existingStudent);
     }
   }
 
   async Exists(students: string[]) {
-    return this.find({ where: students.map(email => ({ email })) });
+    const existingStudents = await this.find({ where: students.map(email => ({ email })) });
+    const toSave: Student[] = [];
+    students
+      .filter(email => !existingStudents.map(student => student.email).includes(email))
+      .map(email => {
+        const newStudent = this.create();
+        newStudent.email = email;
+        toSave.push(newStudent);
+      });
+    await this.save(toSave);
+    return await this.find({ where: students.map(email => ({ email })) });
   }
 }
 

@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+import { createConnection, getConnection } from 'typeorm';
 
 export async function initialize() {
   return await createConnection({
@@ -13,4 +13,9 @@ export async function initialize() {
     cache: process.env.NODE_ENV === 'production',
     entities: [__dirname + '/entity/*{.js,.ts}'],
   });
+}
+
+export async function close() {
+  const connection = getConnection();
+  await connection.close();
 }

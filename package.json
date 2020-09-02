@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --project tsconfig.json src/service.ts",
     "build": "tsc --noEmit false",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "@types/pino": "^6.3.0",

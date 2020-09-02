@@ -1,5 +1,4 @@
 require('dotenv').config();
-import 'reflect-metadata';
 import logger from './logger';
 
 if (process.getuid() === 0) {

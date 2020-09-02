@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import fastify from 'fastify';
 import openapi from 'fastify-openapi-glue';
 import cors from 'fastify-cors';
@@ -6,13 +7,13 @@ import logger from './logger';
 import * as uuid from 'uuid';
 import path from 'path';
 
-export async function bootstrap() {
+export async function bootstrap(isTest = false) {
   const instance = fastify({
     logger,
     pluginTimeout: 5000,
     trustProxy: true,
     maxParamLength: 100,
-    disableRequestLogging: false,
+    disableRequestLogging: isTest,
     ignoreTrailingSlash: true,
     genReqId: () => {
       return uuid.v1().split('-').reverse().join('-');
