@@ -16,8 +16,8 @@ jobs:
           PORT: ${{ secrets.DO_PORT }}
           KEY: ${{ secrets.DO_SSHKEY }}
           with:
-            source: '.'
-            target: '/opt/app'
+            source: .
+            target: /opt/app
       - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DO_IP }}
