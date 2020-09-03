@@ -2,6 +2,8 @@
 
 ![CI](https://github.com/jamoy/d3hiring/workflows/CI/badge.svg)
 
+You can run the test suite by hitting this IP: `128.199.147.222:8400`
+
 ### Setup
 
 Get up and running quickly with docker-compose
@@ -43,3 +45,4 @@ yarn test
 5. OAS3 is implemented up front and have rudimentary validations baked in
 6. Starting docker-compose will have the server throw errors because MySQL is not yet available. I did not include a wait time for this.
 7. Request logging is enabled for verbosity
+8. No SSL cert is implemented on the Digital Ocean Droplet, however it is easy to apply via AWS CF, CF, or DO.

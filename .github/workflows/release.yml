@@ -26,6 +26,7 @@ jobs:
           port: ${{ secrets.DO_PORT }}
           key: ${{ secrets.DO_SSHKEY }}
           script: |
+            su d3hiring
             yarn install
             yarn build
             pm2 reload /opt/app/dist/service.js
