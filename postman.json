@@ -1,0 +1,157 @@
+{
+  "info": {
+    "_postman_id": "619fb702-5e7a-41b0-a1c2-0208f1214497",
+    "name": "d3hiring",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/api/register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFjaGVyIjoidGVhY2hlcmtlbkBnbWFpbC5jb20iLCJpYXQiOjE1OTkwMzc3MTMsImV4cCI6MTU5OTEyNDExMywiaXNzIjoiZDNoaXJpbmcifQ.iC5-8DCgYCCwiuUllLtfSbljLTIUOftg3IWtdoOLJ9E",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"teacher\": \"teacherken@gmail.com\",\n  \"students\":\n    [\n      \"studentjon@gmail.com\",\n      \"studenthon@gmail.com\"\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8400/api/register",
+          "host": ["localhost"],
+          "port": "8400",
+          "path": ["api", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/api/commonstudents",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFjaGVyIjoidGVhY2hlcmtlbkBnbWFpbC5jb20iLCJpYXQiOjE1OTkwMzc3MTMsImV4cCI6MTU5OTEyNDExMywiaXNzIjoiZDNoaXJpbmcifQ.iC5-8DCgYCCwiuUllLtfSbljLTIUOftg3IWtdoOLJ9E"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8400/api/commonstudents?teacher=teacherken2@gmail.com",
+          "host": ["localhost"],
+          "port": "8400",
+          "path": ["api", "commonstudents"],
+          "query": [
+            {
+              "key": "teacher",
+              "value": "teacherken2@gmail.com"
+            },
+            {
+              "key": "teacher",
+              "value": "teacherken@gmail.com",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/api/retrievefornotifications",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFjaGVyIjoidGVhY2hlcmtlbkBnbWFpbC5jb20iLCJpYXQiOjE1OTkwMzc3MTMsImV4cCI6MTU5OTEyNDExMywiaXNzIjoiZDNoaXJpbmcifQ.iC5-8DCgYCCwiuUllLtfSbljLTIUOftg3IWtdoOLJ9E"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"teacher\":  \"teacherken@gmail.com\",\n  \"notification\": \"Hello students @dunkey@gmail.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8400/api/retrievefornotifications",
+          "host": ["localhost"],
+          "port": "8400",
+          "path": ["api", "retrievefornotifications"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/api/authorize",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer test",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"teacher\": \"teacherken@gmail.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8400/api/authorize",
+          "host": ["localhost"],
+          "port": "8400",
+          "path": ["api", "authorize"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/api/suspend",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFjaGVyIjoidGVhY2hlcmtlbkBnbWFpbC5jb20iLCJpYXQiOjE1OTkxMjI4MjcsImV4cCI6MTU5OTIwOTIyNywiaXNzIjoiZDNoaXJpbmcifQ.ysRlQBZSk4bkJ864Joz5Pamjlpc95j7unttqYNKI7U4"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"student\": \"studentjon@gmail2asdasd.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:8400/api/suspend",
+          "host": ["localhost"],
+          "port": "8400",
+          "path": ["api", "suspend"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
