@@ -3,15 +3,13 @@ import { Notification } from '../entity/notification';
 import TeacherRepository from '../repository/teacher';
 import StudentRepository from '../repository/student';
 import { Student } from '../entity/student';
-import isEmail from 'validator/lib/isEmail';
 import { Teacher } from '../entity/teacher';
+import { ParseMentions } from '../utils';
 
 @EntityRepository(Notification)
 export class NotificationRepository extends Repository<Notification> {
   async Broadcast(teacher: string, message: string) {
-    let mentions = message.match(/[@]+[A-Za-z0-9_.@]+/g);
-    mentions = mentions ? mentions.map(mention => mention.substr(1)).filter(mention => isEmail(mention)) : [];
-
+    let mentions = ParseMentions(message);
     const existingTeacher = await TeacherRepository.findOne({ email: teacher });
     const recipients = await TeacherRepository.RegisteredTo([teacher]);
     let notification = this.create();

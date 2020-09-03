@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --project tsconfig.json src/service.ts",
     "build": "tsc --noEmit false",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest --verbose"
   },
   "dependencies": {
     "@types/pino": "^6.3.0",
@@ -25,6 +25,7 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
+    "@types/faker": "^4.1.12",
     "@types/jest": "^26.0.12",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.6.2",
@@ -32,6 +33,7 @@
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "faker": "^5.1.0",
     "husky": "^4.2.5",
     "jest": "^26.4.2",
     "lint-staged": "^10.2.13",

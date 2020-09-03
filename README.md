@@ -48,3 +48,4 @@ yarn test
 6. Starting docker-compose will have the server throw errors because MySQL is not yet available. I did not include a wait time for this.
 7. Request logging is enabled for verbosity
 8. No SSL cert is implemented on the Digital Ocean Droplet, however it is easy to apply via AWS CF, CF, or DO.
+9. CD uses scp and ssh. no fancy deployments here.
