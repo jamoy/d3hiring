@@ -27,7 +27,7 @@ jobs:
           key: ${{ secrets.DO_SSHKEY }}
           script: |
             cd /opt/app
-            alias node="/root/.nvm/versions/node/v14.9.0/bin/node"
+            export node="/root/.nvm/versions/node/v14.9.0/bin/node"
             /root/.nvm/versions/node/v14.9.0/bin/yarn install
             /root/.nvm/versions/node/v14.9.0/bin/yarn build
             /root/.nvm/versions/node/v14.9.0/bin/pm2 reload /opt/app/dist/service.js
