@@ -1,5 +1,7 @@
 # D3Hiring Assessment
 
+![CI](https://github.com/jamoy/d3hiring/workflows/CI/badge.svg)
+
 ### Setup
 
 Get up and running quickly with docker-compose
