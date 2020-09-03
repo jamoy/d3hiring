@@ -174,6 +174,7 @@ describe('D3Hiring Assessment', () => {
         })
       );
     });
+
     it('can send notification to all non suspended students that are mentioned in the message', async () => {
       const teacher = faker.internet.email();
       const student1 = faker.internet.email();

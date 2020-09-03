@@ -26,10 +26,13 @@ export class NotificationRepository extends Repository<Notification> {
     }
     const existingMentions = await StudentRepository.Exists(mentions);
     if (existingMentions) {
-      existingMentions
+      mentions = existingMentions
         .filter((student: Student) => student.suspended === false)
         .filter((student: Student) => !notification.students.map((student: Student) => student.id).includes(student.id))
-        .map((student: Student) => notification.students.push(student));
+        .map((student: Student) => {
+          notification.students.push(student);
+          return student.email;
+        });
     }
     await this.save(notification);
     return {

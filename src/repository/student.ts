@@ -20,14 +20,23 @@ export class StudentRepository extends Repository<Student> {
     const existingStudents = await this.find({ where: students.map(email => ({ email })) });
     const toSave: Student[] = [];
     students
-      .filter(email => !existingStudents.map(student => student.email).includes(email))
+      .filter(email => {
+        const student = existingStudents.find(student => student.email === email);
+        if (student) {
+          return student.suspended === false;
+        }
+        return true;
+      })
+      .filter(email => {
+        return !existingStudents.map(student => student.email).includes(email);
+      })
       .map(email => {
         const newStudent = this.create();
         newStudent.email = email;
         toSave.push(newStudent);
       });
     await this.save(toSave);
-    return await this.find({ where: students.map(email => ({ email })) });
+    return await this.find({ where: students.map(email => ({ email, suspended: false })) });
   }
 }
 
