@@ -3,7 +3,7 @@ on:
   release:
     types:
       - published
-      - updated
+      - edited
 jobs:
   tests:
     name: release to digital ocean
