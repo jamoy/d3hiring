@@ -25,4 +25,7 @@ jobs:
           username: ${{ secrets.DO_USER }}
           port: ${{ secrets.DO_PORT }}
           key: ${{ secrets.DO_SSHKEY }}
-          script: pm2 restart /opt/app/dist/start.js
+          script: |
+            yarn install
+            yarn build
+            pm2 reload /opt/app/dist/service.js
