@@ -32,6 +32,12 @@ docker run -e NODE_ENV=production -e MYSQL_HOST=mysql -p 8400:8400 d3hiring
 
 - make sure you modify `MYSQL_HOST` to point to the correct `HOST`, else the service won't know where the database is.
 
+### Authorization
+
+1. Before running requests, make sure you go to `/api/authorize` and get your token.
+2. Add the `token` into your Authorization header as `Authorization: Bearer ${token}`
+3. Run all subsequent requests using the above
+
 ### Testing
 
 Tests are located in the [`test`](test) directory
